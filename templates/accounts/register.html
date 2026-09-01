@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="auth-card">
+    <h1>Join FoodShare</h1>
+    <p class="subtitle">
+        Help us reduce food waste and feed communities.
+    </p>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button
+            type="submit"
+            class="btn">
+            Create Account
+        </button>
+    </form>
+    <p class="bottom-text">
+
+        Already have an account?
+
+        <a href="{% url 'login' %}">
+            Login
+        </a>
+    </p>
+</div>
+{% endblock %}

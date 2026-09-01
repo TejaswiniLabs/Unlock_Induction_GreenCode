@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="dashboard-header">
+    <div>
+        <p class="small-title">
+            FOOD DONOR
+        </p>
+        <h1>
+            Welcome, {{ user.username }}
+        </h1>
+        <p>
+            Make a difference by sharing surplus food.
+        </p>
+    </div>
+    <a
+        href="{% url 'add_donation' %}"
+        class="btn"
+    >
+        + Add Food
+    </a>
+</div>
+
+<div class="stats">
+    <div class="stat-card">
+        <h3>
+            {{ donations.count }}
+        </h3>
+        <p>
+            Total Donations
+        </p>
+    </div>
+</div>
+
+<h2>
+    My Donations
+</h2>
+
+<div class="donation-grid">
+{% for donation in donations %}
+    <div class="donation-card">
+        <div class="card-top">
+            <h3>
+                {{ donation.food_name }}
+            </h3>
+            <span class="status">
+                {{ donation.status|title }}
+            </span>
+        </div>
+        <p>
+            🍱 {{ donation.quantity }} meals
+        </p>
+        <p>
+            📍 {{ donation.pickup_location }}
+        </p>
+        <p>
+            ⏰ {{ donation.available_until }}
+        </p>
+    </div>
+{% empty %}
+    <div class="empty">
+        <h3>
+            No donations yet
+        </h3>
+        <p>
+            Start by adding your first food donation.
+        </p>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}

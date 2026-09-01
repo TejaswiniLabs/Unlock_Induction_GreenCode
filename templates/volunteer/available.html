@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="dashboard-header">
+    <div>
+        <p class="small-title">
+            VOLUNTEER / NGO
+        </p>
+        <h1>
+            Available Food
+        </h1>
+        <p>
+            Find surplus food that needs to be collected.
+        </p>
+    </div>
+    <a
+        href="{% url 'claimed_donations' %}"
+        class="btn secondary">
+        My Claims
+    </a>
+</div>
+
+<div class="donation-grid">
+{% for donation in donations %}
+    <div class="donation-card">
+        <div class="card-top">
+            <h3>
+                {{ donation.food_name }}
+            </h3>
+            {% if donation.urgency >= 4 %}
+                <span class="urgent">
+                    HIGH PRIORITY
+                </span>
+            {% endif %}
+        </div>
+        <p>
+            🍱 {{ donation.quantity }} meals
+        </p>
+        <p>
+            📍 {{ donation.pickup_location }}
+        </p>
+        <p>
+            ⏰ Available until:
+            {{ donation.available_until }}
+        </p>
+        <p>
+            📝 {{ donation.description }}
+        </p>
+        <a
+            href="{% url 'claim_donation' donation.id %}"
+            class="btn">
+            Claim Donation
+        </a>
+    </div>
+{% empty %}
+    <div class="empty">
+        <h3>
+            No food available right now.
+        </h3>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}

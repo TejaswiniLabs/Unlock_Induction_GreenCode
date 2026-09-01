@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="auth-card">
+    <h1>Welcome Back</h1>
+    <p class="subtitle">
+        Login to continue helping communities.
+    </p>
+
+    {% if error %}
+        <div class="error">
+            {{ error }}
+        </div>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <label>
+            Username
+        </label>
+        <input
+            type="text"
+            name="username"
+            placeholder="Enter username"
+            required>
+        <label>
+            Password
+        </label>
+        <input
+            type="password"
+            name="password"
+            placeholder="Enter password"
+            required>
+        <button
+            type="submit"
+            class="btn">
+            Login
+        </button>
+    </form>
+    <p class="bottom-text">
+
+        Don't have an account?
+
+        <a href="{% url 'register' %}">
+            Register
+        </a>
+    </p>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="form-card">
+    <h1>
+        Add Food Donation
+    </h1>
+    <p>
+        Tell volunteers what food is available.
+    </p>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button
+            type="submit"
+            class="btn">
+            Post Donation
+        </button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="dashboard-header">
+    <div>
+        <p class="small-title">
+            VOLUNTEER / NGO
+        </p>
+        <h1>
+            My Claimed Donations
+        </h1>
+    </div>
+    <a
+        href="{% url 'available_donations' %}"
+        class="btn">
+        Find Food
+    </a>
+</div>
+
+<div class="donation-grid">
+{% for donation in donations %}
+    <div class="donation-card">
+        <h3>
+            {{ donation.food_name }}
+        </h3>
+        <p>
+            🍱 {{ donation.quantity }} meals
+        </p>
+        <p>
+            📍 {{ donation.pickup_location }}
+        </p>
+        <p>
+            Status:
+            <strong>
+                {{ donation.status|title }}
+            </strong>
+        </p>
+
+        {% if donation.status == 'claimed' %}
+            <a
+                href="{% url 'mark_collected' donation.id %}"
+                class="btn">
+                Mark Collected
+            </a>
+        {% elif donation.status == 'collected' %}
+            <a
+                href="{% url 'mark_distributed' donation.id %}"
+                class="btn">
+                Mark Distributed
+            </a>
+        {% endif %}
+    </div>
+{% empty %}
+    <div class="empty">
+        <h3>
+            You haven't claimed any donations.
+        </h3>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}
